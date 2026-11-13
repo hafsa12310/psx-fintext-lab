@@ -1,0 +1,50 @@
+[project]
+name = "psx-fintext-lab"
+version = "0.1.0"
+description = "Financial text classification on PSX announcements: classical ML to Transformers"
+readme = "README.md"
+authors = [
+    { name = "Syeda Hafsa Anis", email = "hafsa.172001@gmail.com" }
+]
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "matplotlib>=3.11.2",
+    "numpy>=2.4.6",
+    "pandas>=3.1.1",
+    "pyyaml>=6.0.3",
+    "scikit-learn>=1.9.1",
+    "torch>=2.15.0",
+]
+
+[project.scripts]
+train = "psx_fintext_lab.train:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "nbstripout>=0.9.1",
+    "pre-commit>=4.7.0",
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
