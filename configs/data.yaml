@@ -33,4 +33,15 @@ psx:
 news:
   feeds:
     - name: dawn_business
-      url: "https://www.dawn.com/feeds/business"
+
+sampling:
+  max_rows: 3000        # total rows to label
+  max_per_symbol: 30    # no single company can dominate
+  max_per_title: 40     # caps routine filings like "Board Meeting"
+  priority_patterns:
+    - "^financial results"
+    - "material information"
+    - "dividend"
+    - "bonus"
+    - "right shares"
+  seed: 42
