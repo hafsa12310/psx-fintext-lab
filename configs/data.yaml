@@ -29,3 +29,8 @@ psx:
   delay_seconds: 1.5
   pdf_base_url: "https://dps.psx.com.pk"
   pdf_excerpt_chars: 1500
+
+news:
+  feeds:
+    - name: dawn_business
+      url: "https://www.dawn.com/feeds/business"
