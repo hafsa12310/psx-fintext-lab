@@ -1,0 +1,47 @@
+psx:
+  request_url: "https://dps.psx.com.pk/announcements"   # check the Headers tab
+  method: "POST"
+  headers:
+    Accept: "text/html, */*; q=0.01"
+    Accept-Language: "en-US,en;q=0.9"
+    Origin: "https://dps.psx.com.pk"
+    Referer: "https://dps.psx.com.pk/announcements"
+    X-Requested-With: "XMLHttpRequest"
+  form:
+    type: "C"          # the company-announcements code from Payload
+    symbol: ""
+    query: ""
+    count: 50
+    page: "annc"
+  date_from_field: "date_from"
+  date_to_field: "date_to"
+  date_format: "%Y-%m-%d"
+  page_field: "offset"
+  page_start: 0
+  page_step: 50
+  max_pages: 100
+
+  column_map:
+    name: company
+
+  start_month: "2026-05"
+  end_month: "2026-10"
+  delay_seconds: 1.5
+  pdf_base_url: "https://dps.psx.com.pk"
+  pdf_excerpt_chars: 1500
+
+news:
+  feeds:
+    - name: dawn_business
+
+sampling:
+  max_rows: 3000        # total rows to label
+  max_per_symbol: 30    # no single company can dominate
+  max_per_title: 40     # caps routine filings like "Board Meeting"
+  priority_patterns:
+    - "^financial results"
+    - "material information"
+    - "dividend"
+    - "bonus"
+    - "right shares"
+  seed: 42
