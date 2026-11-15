@@ -22,3 +22,7 @@ mlruns/
 # macOS / editors
 .DS_Store
 .vscode/
+
+# Phase 1
+.env
+data/interim/*
