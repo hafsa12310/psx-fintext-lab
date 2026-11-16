@@ -20,6 +20,8 @@ psx:
   page_start: 0
   page_step: 50
   max_pages: 100
+  ocr_pages: 2
+  ocr_dpi: 200
 
   column_map:
     name: company
