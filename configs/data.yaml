@@ -73,3 +73,7 @@ labelling:
 verification:
   sample_size: 300    # your own labels; becomes the test set
   seed: 42
+
+split:
+  val_size: 0.15
+  seed: 42
