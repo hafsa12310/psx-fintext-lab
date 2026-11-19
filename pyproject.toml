@@ -35,6 +35,7 @@ clean-data = "psx_fintext_lab.data.clean:main"
 fetch-pdfs = "psx_fintext_lab.data.fetch_pdfs:main"
 export-batches = "psx_fintext_lab.data.label_batches:export_batches"
 import-labels = "psx_fintext_lab.data.label_batches:import_labels"
+verify-labels = "psx_fintext_lab.data.verify:main"
 
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]

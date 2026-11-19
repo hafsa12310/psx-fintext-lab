@@ -69,3 +69,7 @@ labelling:
     - regulatory_compliance
     - market_news
     - other
+
+verification:
+  sample_size: 300    # your own labels; becomes the test set
+  seed: 42
