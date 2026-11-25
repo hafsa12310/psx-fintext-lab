@@ -20,6 +20,8 @@ psx:
   page_start: 0
   page_step: 50
   max_pages: 100
+  ocr_pages: 2
+  ocr_dpi: 200
 
   column_map:
     name: company
@@ -28,7 +30,13 @@ psx:
   end_month: "2026-10"
   delay_seconds: 1.5
   pdf_base_url: "https://dps.psx.com.pk"
-  pdf_excerpt_chars: 1500
+  pdf_excerpt_chars: 4000
+  # Financial results: the figures sit in annexures on later pages, so read more pages and
+  # keep the letter header plus snippets around key terms.
+  results_pages: 8          # pages to read for financial results PDFs
+  header_chars: 800         # keep the start of the letter (dividend lines)
+  snippet_chars: 400        # characters kept on each side of a key term
+  key_terms: [earnings per share, eps, profit after tax, profit before tax, loss after tax, "(loss)", net profit, net loss, profit for the year, loss for the year]
 
 news:
   feeds:
@@ -44,4 +52,28 @@ sampling:
     - "dividend"
     - "bonus"
     - "right shares"
+  seed: 42
+
+labelling:
+  method: claude-code          # labelled in Claude Code sessions (see docs/claude_code_labelling.md)
+  max_text_chars: 4000         # longer texts are cut to this length in the batch files
+  labels: [positive, negative, neutral]
+  event_types:
+    - financial_results
+    - dividend_payout
+    - board_meeting
+    - agm_egm
+    - material_information
+    - corporate_action
+    - management_change
+    - regulatory_compliance
+    - market_news
+    - other
+
+verification:
+  sample_size: 300    # your own labels; becomes the test set
+  seed: 42
+
+split:
+  val_size: 0.15
   seed: 42

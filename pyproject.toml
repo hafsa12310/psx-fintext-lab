@@ -15,8 +15,10 @@ dependencies = [
     "matplotlib>=3.11.2",
     "numpy>=2.4.6",
     "pandas>=3.1.1",
+    "pdf2image>=1.17.0",
     "pyarrow>=26.0.1",
     "pypdf>=7.0.1",
+    "pytesseract>=0.3.13",
     "python-dotenv>=1.2.4",
     "pyyaml>=6.0.3",
     "requests>=2.34.2",
@@ -30,6 +32,12 @@ train = "psx_fintext_lab.train:main"
 import-psx = "psx_fintext_lab.data.import_har:main"
 scrape-news = "psx_fintext_lab.data.scrape_news:main"
 clean-data = "psx_fintext_lab.data.clean:main"
+fetch-pdfs = "psx_fintext_lab.data.fetch_pdfs:main"
+export-batches = "psx_fintext_lab.data.label_batches:export_batches"
+import-labels = "psx_fintext_lab.data.label_batches:import_labels"
+verify-labels = "psx_fintext_lab.data.verify:main"
+label-report = "psx_fintext_lab.data.label_report:main"
+make-splits = "psx_fintext_lab.data.split:main"
 
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]
