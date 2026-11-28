@@ -1,0 +1,5 @@
+k_min: 2
+k_max: 15
+k: 10
+seed: 42
+embeddings: embeddings_train_title.npy

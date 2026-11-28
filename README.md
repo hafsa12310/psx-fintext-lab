@@ -42,3 +42,42 @@ negative or neutral for a current shareholder (rules in `docs/labelling_guidelin
 
 ![Label distribution](reports/figures/class_balance.png)
 ![Labels by event type](reports/figures/label_by_event_type.png)
+
+## Phase 2: Unsupervised exploration
+
+Each training announcement (2,245 rows; the test set was not used) was turned
+into a 384-dimensional vector with `all-MiniLM-L6-v2`, grouped with K-means
+(no labels used), and plotted in 2D with PCA. Groups were compared with the
+LLM-assigned event types using ARI and NMI (0 = no match, 1 = perfect match).
+
+| Input | k | Silhouette | ARI | NMI | PCA 2D variance |
+|---|---|---|---|---|---|
+| full text | 2 (best silhouette) | 0.121 | 0.048 | 0.083 | 14.8% |
+| full text | 10 | 0.061 | 0.467 | 0.517 | 14.8% |
+| **titles only** | 10 | **0.267** | **0.577** | **0.725** | **32.1%** |
+
+**Findings**
+
+- Picking k by silhouette alone chose k = 2, which split documents by format
+  (letters vs report-style filings) and ignored the topic. With k = 10, the
+  groups matched announcement types much better, even though silhouette was lower.
+- Titles clustered better than full text on every metric, likely because the
+  letterheads, addresses and greetings in the PDF text blur the topic.
+- With titles and no labels, K-means found clean groups for financial results
+  (quarterly vs annual), dividends, AGMs, board meetings, report filings and
+  management changes. It also found a clear group of corporate briefing
+  sessions, which the event-type list had no category for (all labelled `other`).
+- Sentiment was **not** separated: almost all positive and negative items fall
+  inside the two financial-results groups, in roughly equal numbers. Telling good
+  from bad news needs a model that reads the figures in the full text. This
+  motivates the supervised models in Phase 3 and removing boilerplate before training.
+
+Reproduce: set `input` in `configs/embeddings.yaml` and `embeddings` in
+`configs/clustering.yaml`, then run `uv run embed && uv run cluster`.
+Full report: `reports/clustering.md`.
+
+Plots below are from the titles-only, k = 10 run.
+
+![Clusters](reports/figures/pca_clusters.png)
+![Event types](reports/figures/pca_event_types.png)
+![Sentiment](reports/figures/pca_sentiment.png)
