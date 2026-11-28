@@ -1,0 +1,5 @@
+model: "sentence-transformers/all-MiniLM-L6-v2"
+max_chars: 2000
+batch_size: 32
+normalize: true
+input: title
